@@ -1,35 +1,45 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect, useState } from 'react';
+import { api } from './api/client';
+import { CaptureForm } from './components/CaptureForm';
+import { TaskList } from './components/TaskList';
+import type { CreateLogReq, LogEntry } from './types';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [tasks, setTasks] = useState<LogEntry[]>([]);
+
+  const fetchTasks = async () => {
+    try {
+      const data = await api.getOpenTasks();
+      setTasks(data);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  useEffect(() => {
+    fetchTasks();
+  }, []);
+
+  const handleCapture = async (entry: CreateLogReq) => {
+    await api.createLog(entry);
+    if (entry.type === 'Task') {
+      await fetchTasks();
+    }
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="container">
+      <header style={{ marginTop: 'var(--space-lg)', textAlign: 'center' }}>
+        <h1 style={{ fontWeight: 800, fontSize: '2rem', letterSpacing: '-0.05em' }}>BrainLogger</h1>
+      </header>
+
+      <main style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-xl)' }}>
+        <CaptureForm onSubmit={handleCapture} />
+
+        <TaskList tasks={tasks} />
+      </main>
+    </div>
+  );
 }
 
-export default App
+export default App;

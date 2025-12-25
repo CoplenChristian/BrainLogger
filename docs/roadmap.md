@@ -5,26 +5,26 @@ This roadmap orders development from the "Data Foundation" up to the "User Exper
 ## Phase 1: Foundation (Backend Core)
 **Goal:** Establish the data model and API surface.
 
-- [ ] **Database Schema**
-    - [ ] Define `LogEntry` entity (Id, UserId, Timestamp, Type, Content, CompletedAt)
-    - [ ] Create EF Core Migrations
-    - [ ] Update `postgres.yaml` to ensure persistence
-- [ ] **API Scaffold**
-    - [ ] `POST /api/log` (Stubbed)
-    - [ ] `GET /api/tasks` (Stubbed)
-    - [ ] `POST /api/flush` (Stubbed)
+- [x] **Database Schema**
+    - [x] Define `LogEntry` entity (Id, UserId, Timestamp, Type, Content, CompletedAt)
+    - [ ] Create EF Core Migrations (Pending environment fix)
+    - [x] Update `postgres.yaml` to ensure persistence
+- [x] **API Scaffold**
+    - [x] `POST /api/log` (Stubbed)
+    - [x] `GET /api/tasks` (Stubbed)
+    - [x] `POST /api/flush` (Stubbed)
 
 ## Phase 2: The Loop (Frontend Capture)
 **Goal:** Enable the "Capture" friction-free workflow. This is the primary user interaction.
 
-- [ ] **Capture UI**
-    - [ ] Create `CaptureForm` component
-    - [ ] Implement Type Picker (Task, Idea, Note, Wait)
-    - [ ] Connect to `POST /api/log`
-- [ ] **Task List UI**
-    - [ ] Create `TaskList` component
-    - [ ] Display `type='task'` entries
-    - [ ] Implement "Mark Done" (Opt-in completion)
+- [x] **Capture UI**
+    - [x] Create `CaptureForm` component
+    - [x] Implement Type Picker (Task, Idea, Note, Wait)
+    - [x] Connect to `POST /api/log`
+- [x] **Task List UI**
+    - [x] Create `TaskList` component
+    - [x] Display `type='task'` entries
+    - [x] Implement "Mark Done" (Opt-in completion)
 
 ## Phase 3: The Brain (Flush Cycle)
 **Goal:** Implement the "Forget Freely" promise by offloading to Markdown/NotebookLM.
