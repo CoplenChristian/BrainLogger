@@ -1,0 +1,10 @@
+# brainlogger-deploy/Tiltfile
+
+# Deploy dependencies
+k8s_yaml('k8s/postgres.yaml')
+
+# Backend
+include('../brainlogger-backend/Tiltfile')
+
+# Frontend
+include('../brainlogger-frontend/Tiltfile')

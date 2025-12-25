@@ -1,0 +1,8 @@
+package_name = 'brainlogger-backend'
+
+docker_build(package_name, '.', dockerfile='Dockerfile')
+
+k8s_yaml('k8s/deployment.yaml')
+k8s_yaml('k8s/service.yaml')
+
+k8s_resource(package_name, port_forwards=8080)

@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: brainlogger-frontend
+  labels:
+    app: brainlogger-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: brainlogger-frontend
+  template:
+    metadata:
+      labels:
+        app: brainlogger-frontend
+    spec:
+      containers:
+      - name: brainlogger-frontend
+        image: brainlogger-frontend
+        ports:
+        - containerPort: 80

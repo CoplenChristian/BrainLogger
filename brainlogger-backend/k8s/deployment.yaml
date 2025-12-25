@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: brainlogger-backend
+  labels:
+    app: brainlogger-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: brainlogger-backend
+  template:
+    metadata:
+      labels:
+        app: brainlogger-backend
+    spec:
+      containers:
+      - name: brainlogger-backend
+        image: brainlogger-backend
+        ports:
+        - containerPort: 8080
+        env:
+        - name: ConnectionStrings__DefaultConnection
+          value: "Host=postgres;Database=brainlogger;Username=brainlogger;Password=brainlogger"

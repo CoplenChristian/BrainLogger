@@ -1,0 +1,6 @@
+@BrainLogger_HostAddress = http://localhost:5105
+
+GET {{BrainLogger_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
